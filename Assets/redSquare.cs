@@ -6,10 +6,11 @@ using System;
 public class redSquare : MonoBehaviour
 {
     public Rigidbody2D redSquareRigid;
-    public float redJump, redVelocityX = 4, rotationSpeed = 0, rotationMultiplyer = 1, tempVelocityX;
+    public float redJump = 10, redVelocityX = 4, rotationSpeed = 0;
+    private float rotationMultiplyer = 5, tempVelocityX;
     static public bool colliding = false;
-    public string jumpKey;
-    public UnityEngine.KeyCode pressedKey;
+    public UnityEngine.KeyCode jumpKey;
+    private UnityEngine.KeyCode pressedKey;
     
       
     // Start is called before the first frame update
@@ -22,20 +23,23 @@ public class redSquare : MonoBehaviour
     void Update()
     {
         
-        //this code was stolen
+        //this code was taken from internet, it checks every keycode to see which matches the key pressed
         foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
         {
-            if (Input.GetKey(kcode))
-                Debug.Log("Keycode: " + kcode);
-            Debug.Log(pressedKey.GetType().ToString());
+            if (Input.GetKeyDown(kcode))
+                pressedKey = kcode;
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))//Jump w/ space
+        Debug.Log(pressedKey);
+
+        if(pressedKey == jumpKey)//jump when key assigned in jumpKey is pressed
         {
+            Debug.Log("matching");
             tempVelocityX = redSquareRigid.velocity.x;
             redSquareRigid.velocity = Vector2.up * redJump;
             redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
-            /**redSquareRigid.velocity = new Vector2(redSquareRigid.velocity.x, redJump)*/
+            pressedKey = 0;
         }
 
         if (gameObject.transform.position.x > 8.5)//Right Bound
@@ -49,26 +53,27 @@ public class redSquare : MonoBehaviour
             redSquareRigid.velocity = new Vector2((redVelocityX), redSquareRigid.velocity.y);
             
         }
-        
-        if (gameObject.transform.position.y < -4.5 || gameObject.transform.position.y > 4.5)//Upper - Lower Bound
+
+        //Upper - Lower Bound
+        if (gameObject.transform.position.y < -4.5 || gameObject.transform.position.y > 4.5)
         {
-            gameObject.transform.position = new Vector2(0, 0);//Temperarily Reset to center of screen
+            //Temperarily Reset to center of screen
+            gameObject.transform.position = new Vector2(0, 0);
         }
     }
     
     private void FixedUpdate()
     {
-        if (redUpHit.upHit || redDownHit.downHit) 
+        //Rotating if not colliding
+        if (!colliding)
         {
-            colliding = true;
-        }
-
-        if (!colliding)//Rotating if not colliding
-        {
-            if (redSquareRigid.velocity.x > 0)//Changing rotation based on which direction the square is moving
+            //Changing rotation based on which direction the square is moving
+            if (redSquareRigid.velocity.x > 0)
             {
-                rotationSpeed = rotationMultiplyer * redSquareRigid.velocity.y;//Rotation speed based on y-velocity and multiplyer
-                transform.rotation = Quaternion.Euler(0, 0, rotationSpeed);//changing rotation
+                //Rotation speed based on y-velocity and multiplyer
+                rotationSpeed = rotationMultiplyer * redSquareRigid.velocity.y;
+                //changing rotation
+                transform.rotation = Quaternion.Euler(0, 0, rotationSpeed);
             }
             else
             {

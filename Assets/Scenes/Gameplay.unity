@@ -159,6 +159,7 @@ MonoBehaviour:
   - health
   - gravity
   - shield
+  listPlayers: []
 --- !u!61 &272667802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -399,8 +400,7 @@ MonoBehaviour:
   redJump: 10
   redVelocityX: 4
   rotationSpeed: 0
-  rotationMultiplyer: 5
-  tempVelocityX: 0
+  jumpKey: 32
 --- !u!61 &1020857709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 2133085246}
   - component: {fileID: 2133085245}
   - component: {fileID: 2133085244}
-  - component: {fileID: 2133085243}
+  - component: {fileID: 2133085248}
   m_Layer: 0
   m_Name: blueSquare
   m_TagString: Players
@@ -718,18 +718,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2133085243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133085242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28c4d71edfc6d654b807258f5eada902, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &2133085244
 Rigidbody2D:
   serializedVersion: 4
@@ -869,6 +857,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133085248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133085242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdbae2e0715ee74e8f9783c80b7f555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redSquareRigid: {fileID: 0}
+  redJump: 10
+  redVelocityX: 4
+  rotationSpeed: 0
+  jumpKey: 119
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
