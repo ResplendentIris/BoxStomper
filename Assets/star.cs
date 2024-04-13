@@ -71,7 +71,7 @@ public class star : MonoBehaviour
                 victimRB = player.GetComponent<Rigidbody2D>();
                 Debug.Log(player.name + " is not activator");
                 //apply gravity
-                victimRB.gravityScale += 5;
+                victimRB.gravityScale = 5;
             }
 
             //else skip
