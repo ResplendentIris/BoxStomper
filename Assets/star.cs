@@ -14,7 +14,7 @@ public class star : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-3, 3), 0);
        
     }
 
@@ -35,41 +35,42 @@ public class star : MonoBehaviour
         {
             Debug.Log(player.name);
         }*/
-        
+
 
         //this command returns the name of the object that collides
         //Debug.Log(col.gameObject.name);
-        
+
         //stores random value 0-3 as a float, it gets rounded down when put inside tempInt, effectively making it 0-2
+        transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-3, 3), 0);
+
         int tempInt = Random.Range(0, powerUps.Length);
 
         //runs code based on what number was generated
         if (tempInt == 0)
         {
             //Debug.Log(powerUps[tempInt]);
-            //health();
-            gravity(col.gameObject);
+            giveHealth(col.gameObject);
         }
         else if (tempInt == 1)
         {
             //Debug.Log(powerUps[tempInt]);
-            gravity(col.gameObject);
+            giveGravity(col.gameObject);
         }
         else if (tempInt >= 2) 
         {
             //Debug.Log(powerUps[tempInt]);
-            gravity(col.gameObject);
+            giveShield(col.gameObject);
         }
     }
 
-    void gravity(GameObject activator)
+    void giveGravity(GameObject activator)
     {
         foreach (GameObject player in listPlayers)
         {
             if (player.name != activator.name)
             {
                 victimRB = player.GetComponent<Rigidbody2D>();
-                Debug.Log(player.name + " is not activator");
+                //Debug.Log(player.name + " is not activator");
                 //apply gravity
                 victimRB.gravityScale = 5;
             }
@@ -77,7 +78,20 @@ public class star : MonoBehaviour
             //else skip
         }
     }
+
+    void giveHealth(GameObject activator)
+    {
+        activator.GetComponent<powerups>().lives += 1;
+        activator.GetComponent<powerups>().healthUpdate();
+    }
+
+    void giveShield(GameObject activator)
+    {
+        activator.GetComponent<powerups>().shieldObject.GetComponent<SpriteRenderer>().enabled = true;
+        activator.GetComponent<powerups>().shield = true;
+    }
+
+
 }
 
- 
-        
+

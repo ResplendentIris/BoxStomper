@@ -31,8 +31,6 @@ public class redSquare : MonoBehaviour
 
         }
 
-        Debug.Log(pressedKey);
-
         if(pressedKey == jumpKey)//jump when key assigned in jumpKey is pressed
         {
             Debug.Log("matching");

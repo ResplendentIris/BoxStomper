@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Players
+  - heart3
+  - heart2
+  - heart1
+  - heart0
   layers:
   - Default
   - TransparentFX
