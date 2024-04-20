@@ -24,6 +24,7 @@ public class redSquare : MonoBehaviour
     {
         
         //this code was taken from internet, it checks every keycode to see which matches the key pressed
+        //https://forum.unity.com/threads/find-out-which-key-was-pressed.385250/
         foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
         {
             if (Input.GetKeyDown(kcode))
@@ -31,7 +32,8 @@ public class redSquare : MonoBehaviour
 
         }
 
-        if(pressedKey == jumpKey)//jump when key assigned in jumpKey is pressed
+        //jump when key assigned in jumpKey is pressed
+        if (pressedKey == jumpKey)
         {
             Debug.Log("matching");
             tempVelocityX = redSquareRigid.velocity.x;
@@ -40,29 +42,32 @@ public class redSquare : MonoBehaviour
             pressedKey = 0;
         }
 
-        if (gameObject.transform.position.x > 8.5)//Right Bound
+        //Right Boundary of screen, changing direction of player
+        if (gameObject.transform.position.x > 8.5)
         {
-            redSquareRigid.velocity = new Vector2(-(redVelocityX), redSquareRigid.velocity.y);
-            
+            redSquareRigid.velocity = new Vector2(-(Mathf.Abs(redSquareRigid.velocity.x)), redSquareRigid.velocity.y);
+            Debug.Log(gameObject.name + ":  has hit right wall");
+
         }
 
-        if (gameObject.transform.position.x < -8.5)//Left Bound
+        //Left Boundary of screen, changing direction of player
+        if (gameObject.transform.position.x < -8.5)
         {
-            redSquareRigid.velocity = new Vector2((redVelocityX), redSquareRigid.velocity.y);
-            
+            redSquareRigid.velocity = new Vector2(Mathf.Abs(redSquareRigid.velocity.x), redSquareRigid.velocity.y);
+
         }
 
-        //Upper - Lower Bound
-        if (gameObject.transform.position.y < -4.5 || gameObject.transform.position.y > 4.5)
+        //Upper Boundary of screen, returns player to center of the screen
+        if (gameObject.transform.position.y > 4.5)
         {
-            //Temperarily Reset to center of screen
+            //Reset to center of screen
             gameObject.transform.position = new Vector2(0, 0);
         }
     }
     
     private void FixedUpdate()
     {
-        //Rotating if not colliding
+        //Rotating player if not colliding
         if (!colliding)
         {
             //Changing rotation based on which direction the square is moving
@@ -75,8 +80,10 @@ public class redSquare : MonoBehaviour
             }
             else
             {
-                rotationSpeed = -(rotationMultiplyer * redSquareRigid.velocity.y);//Rotation speed based on y-velocity and multiplyer
-                transform.rotation = Quaternion.Euler(0, 0, rotationSpeed);//changing rotation
+                //Rotation speed based on y-velocity and multiplyer
+                rotationSpeed = -(rotationMultiplyer * redSquareRigid.velocity.y);
+                //changing rotation
+                transform.rotation = Quaternion.Euler(0, 0, rotationSpeed);
             }
         }
     }

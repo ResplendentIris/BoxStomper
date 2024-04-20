@@ -29,14 +29,11 @@ public class powerups : MonoBehaviour
         //sets heart position to 1 above redsquare
         hearts.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
-
         //sets shields position to redsquare as long as shield is active
         if (shield)
         {
             shieldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
         }
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -60,13 +57,8 @@ public class powerups : MonoBehaviour
             //this is so the health still updates even when it equals 0
             healthUpdate();
         }
-        
-
- 
-
-
-
     }
+    //Function to update health
     public void healthUpdate()
     {
         //sets the correct heart sprite for number of lives left
@@ -85,11 +77,6 @@ public class powerups : MonoBehaviour
         else if (lives == 0)
         {
             hearts.GetComponent<SpriteRenderer>().sprite = GameObject.FindWithTag("heart0").GetComponent<SpriteRenderer>().sprite;
-
         }
     }
-
-
-
-
 }
