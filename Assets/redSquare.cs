@@ -11,21 +11,36 @@ public class redSquare : MonoBehaviour
     static public bool colliding = false;
     public UnityEngine.KeyCode jumpKey;
     private UnityEngine.KeyCode pressedKey;
-    
+    private bool goingRight;
       
     // Start is called before the first frame update
     void Start()
     {
+        //moves player when game first starts
         redSquareRigid.velocity = new Vector2(redVelocityX, redSquareRigid.velocity.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(redSquareRigid.velocity.x);
+        //sets if player is going right or not
+        if (GetComponent<powerups>().alive)
+        {
+            if (redSquareRigid.velocity.x > 0)
+            {
+                goingRight = true;
+            }
+            else
+            {
+                goingRight = false;
+            }
+        }
+
+
         //this code was taken from internet, it checks every keycode to see which matches the key pressed
         //https://forum.unity.com/threads/find-out-which-key-was-pressed.385250/
-        foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
         {
             if (Input.GetKeyDown(kcode))
                 pressedKey = kcode;
@@ -40,6 +55,22 @@ public class redSquare : MonoBehaviour
             redSquareRigid.velocity = Vector2.up * redJump;
             redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
             pressedKey = 0;
+            
+            //resets velocity when player gets off the ground
+            if (!GetComponent<powerups>().alive)
+            {
+                GetComponent<powerups>().alive = true;
+                //sets the new velocity correctly based on what direction the player should move in
+                if (goingRight)
+                {
+                    redSquareRigid.velocity = new Vector2(Math.Abs(redVelocityX), redSquareRigid.velocity.y);
+                }
+                else
+                {
+                    redSquareRigid.velocity = new Vector2(-Math.Abs(redVelocityX), redSquareRigid.velocity.y);
+
+                }
+            }
         }
 
         //Right Boundary of screen, changing direction of player
@@ -63,9 +94,11 @@ public class redSquare : MonoBehaviour
             //Reset to center of screen
             gameObject.transform.position = new Vector2(0, 0);
         }
+
+
     }
-    
-    private void FixedUpdate()
+
+        private void FixedUpdate()
     {
         //Rotating player if not colliding
         if (!colliding)

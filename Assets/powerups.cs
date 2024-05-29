@@ -15,6 +15,8 @@ public class powerups : MonoBehaviour
     public bool shield = false;
     private GameObject downArrow;
     public bool gravity = false;
+    public bool alive = true;
+
 
 
     // Start is called before the first frame update
@@ -48,9 +50,18 @@ public class powerups : MonoBehaviour
         {
             shieldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
+
+        if (!alive)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        alive = false;
+
+
         //removes shield and makes it invisible if active, removes lives otherwise
         //healthUpdate must be on the last line
         if (shield)
