@@ -9,6 +9,7 @@ using UnityEngine;
 public class powerups : MonoBehaviour
 {
     public GameObject syncTo;
+    private GameObject heartObject;
     public GameObject hearts;
     public GameObject shieldObject;
     public int lives = 3;
@@ -18,7 +19,9 @@ public class powerups : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        heartObject = GameObject.Find("redHeart");
         //set the 3 heart sprite to heartsprite
+        hearts = Instantiate(heartObject);
         hearts.GetComponent<SpriteRenderer>().sprite = GameObject.FindWithTag("heart3").GetComponent<SpriteRenderer>().sprite;
     }
 

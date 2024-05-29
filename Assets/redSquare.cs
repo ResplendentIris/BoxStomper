@@ -35,7 +35,7 @@ public class redSquare : MonoBehaviour
         //jump when key assigned in jumpKey is pressed
         if (pressedKey == jumpKey)
         {
-            Debug.Log("matching");
+            //Debug.Log("matching");
             tempVelocityX = redSquareRigid.velocity.x;
             redSquareRigid.velocity = Vector2.up * redJump;
             redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
@@ -46,7 +46,7 @@ public class redSquare : MonoBehaviour
         if (gameObject.transform.position.x > 8.5)
         {
             redSquareRigid.velocity = new Vector2(-(Mathf.Abs(redSquareRigid.velocity.x)), redSquareRigid.velocity.y);
-            Debug.Log(gameObject.name + ":  has hit right wall");
+            //Debug.Log(gameObject.name + ":  has hit right wall");
 
         }
 
