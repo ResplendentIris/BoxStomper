@@ -56,6 +56,8 @@ public class star : MonoBehaviour
                 victimRB = player.GetComponent<Rigidbody2D>();
                 //Applying gravity
                 victimRB.gravityScale = 5;
+                victimRB.GetComponent<powerups>().gravity = true;
+
             }
         }
     }

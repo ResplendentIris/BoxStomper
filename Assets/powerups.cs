@@ -8,19 +8,24 @@ using UnityEngine;
 
 public class powerups : MonoBehaviour
 {
-    public GameObject syncTo;
     private GameObject heartObject;
-    public GameObject hearts;
+    private GameObject hearts;
     public GameObject shieldObject;
     public int lives = 3;
     public bool shield = false;
+    private GameObject downArrow;
+    public bool gravity = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //sets objects to variable so we dont need public variables
+
+        //instantiation makes it so every player can have a new thing
+        downArrow = Instantiate(GameObject.Find("down arrow"));
+        shieldObject = Instantiate(GameObject.Find("benshield"));
         heartObject = GameObject.Find("redHeart");
-        //set the 3 heart sprite to heartsprite
         hearts = Instantiate(heartObject);
         hearts.GetComponent<SpriteRenderer>().sprite = GameObject.FindWithTag("heart3").GetComponent<SpriteRenderer>().sprite;
     }
@@ -28,9 +33,15 @@ public class powerups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lives);
         //sets heart position to 1 above redsquare
         hearts.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+
+        if (gravity)
+        {
+            downArrow.transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+
+        }
+
 
         //sets shields position to redsquare as long as shield is active
         if (shield)
@@ -44,9 +55,10 @@ public class powerups : MonoBehaviour
         //healthUpdate must be on the last line
         if (shield)
         {
-            shield = false;
+            
             shieldObject.GetComponent<SpriteRenderer>().enabled = false;
             healthUpdate();
+            shield = false;
 
         }
         //doesn't let lives go less than 0
