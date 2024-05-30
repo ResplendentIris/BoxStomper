@@ -11,10 +11,9 @@ public class star : MonoBehaviour
     //makes a list of game objects
     public GameObject[] listPlayers;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //Randomize star position
+        //Randomize start position
         transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-3, 3), 0);
     }
 
@@ -44,6 +43,7 @@ public class star : MonoBehaviour
             giveShield(col.gameObject);
         }
     }
+
     //Apply Gravity to everyone else except for the activator
     void giveGravity(GameObject activator)
     {
@@ -61,6 +61,7 @@ public class star : MonoBehaviour
             }
         }
     }
+
     //Giving health to the player who activated the ability
     void giveHealth(GameObject activator)
     {

@@ -643,6 +643,7 @@ MonoBehaviour:
   shield: 0
   gravity: 0
   alive: 1
+  lostAllLives: 0
 --- !u!58 &1020857714
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -982,7 +983,7 @@ GameObject:
   - component: {fileID: 1374592146}
   m_Layer: 0
   m_Name: ground
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1426,7 +1427,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!61 &2133085245
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1546,7 +1547,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133085242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bdbae2e0715ee74e8f9783c80b7f555, type: 3}
   m_Name: 
@@ -1563,7 +1564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133085242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fd0456af658c3648b41a70f0df55f50, type: 3}
   m_Name: 
@@ -1573,6 +1574,7 @@ MonoBehaviour:
   shield: 0
   gravity: 0
   alive: 1
+  lostAllLives: 0
 --- !u!58 &2133085250
 CircleCollider2D:
   m_ObjectHideFlags: 0

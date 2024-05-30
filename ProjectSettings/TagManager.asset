@@ -9,6 +9,7 @@ TagManager:
   - heart2
   - heart1
   - heart0
+  - ground
   layers:
   - Default
   - TransparentFX

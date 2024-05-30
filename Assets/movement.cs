@@ -12,7 +12,7 @@ public class redSquare : MonoBehaviour
     public UnityEngine.KeyCode jumpKey;
     private UnityEngine.KeyCode pressedKey;
     private bool goingRight;
-      
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,6 @@ public class redSquare : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(redSquareRigid.velocity.x);
         //sets if player is going right or not
         if (GetComponent<powerups>().alive)
         {
@@ -38,6 +37,7 @@ public class redSquare : MonoBehaviour
         }
 
 
+
         //this code was taken from internet, it checks every keycode to see which matches the key pressed
         //https://forum.unity.com/threads/find-out-which-key-was-pressed.385250/
         foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
@@ -48,14 +48,14 @@ public class redSquare : MonoBehaviour
         }
 
         //jump when key assigned in jumpKey is pressed
-        if (pressedKey == jumpKey)
+        if (pressedKey == jumpKey && GetComponent<powerups>().lostAllLives == false)
         {
             //Debug.Log("matching");
             tempVelocityX = redSquareRigid.velocity.x;
             redSquareRigid.velocity = Vector2.up * redJump;
             redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
             pressedKey = 0;
-            
+
             //resets velocity when player gets off the ground
             if (!GetComponent<powerups>().alive)
             {
@@ -89,7 +89,7 @@ public class redSquare : MonoBehaviour
         }
 
         //Upper Boundary of screen, returns player to center of the screen
-        if (gameObject.transform.position.y > 4.5)
+        if (gameObject.transform.position.y > 5.5)
         {
             //Reset to center of screen
             gameObject.transform.position = new Vector2(0, 0);
@@ -98,7 +98,7 @@ public class redSquare : MonoBehaviour
 
     }
 
-        private void FixedUpdate()
+    private void FixedUpdate()
     {
         //Rotating player if not colliding
         if (!colliding)
