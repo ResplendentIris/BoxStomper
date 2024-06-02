@@ -20,6 +20,7 @@ public class star : MonoBehaviour
     //detects collisions
     private void OnTriggerEnter2D(Collider2D col)
     {
+        
         //input all GameObjects with player tag into listPlayers
         listPlayers = GameObject.FindGameObjectsWithTag("Players");
 
@@ -28,6 +29,7 @@ public class star : MonoBehaviour
         //Gets a random ability in ability
         int tempInt = Random.Range(0, powerUps.Length);
         string ability = powerUps[tempInt];
+        Debug.Log(ability);
 
         //runs code based on what ability it randomized to 
         if (ability == "health")

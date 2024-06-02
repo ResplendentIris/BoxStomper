@@ -14,6 +14,7 @@ public class redSquare : MonoBehaviour
     private UnityEngine.KeyCode pressedKey;
     private bool goingRight;
     private bool gameStart = false;
+    public Vector2 startLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class redSquare : MonoBehaviour
 
         if (gameStart == false)
         {
-            transform.position = new Vector2(0, 0);
+            transform.position = startLocation;
         }
 
 

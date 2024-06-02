@@ -571,6 +571,7 @@ MonoBehaviour:
   redVelocityX: 4
   rotationSpeed: 0
   jumpKey: 323
+  startLocation: {x: 1, y: 0}
 --- !u!61 &1020857709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1511,7 +1512,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 2
+  m_Constraints: 0
 --- !u!61 &2133085245
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1631,7 +1632,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133085242}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bdbae2e0715ee74e8f9783c80b7f555, type: 3}
   m_Name: 
@@ -1641,6 +1642,7 @@ MonoBehaviour:
   redVelocityX: -4
   rotationSpeed: 0
   jumpKey: 119
+  startLocation: {x: -1, y: 0}
 --- !u!114 &2133085249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,7 +1650,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133085242}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fd0456af658c3648b41a70f0df55f50, type: 3}
   m_Name: 
