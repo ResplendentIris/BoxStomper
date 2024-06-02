@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Security.Cryptography;
 
 public class redSquare : MonoBehaviour
 {
@@ -12,15 +13,18 @@ public class redSquare : MonoBehaviour
     public UnityEngine.KeyCode jumpKey;
     private UnityEngine.KeyCode pressedKey;
     private bool goingRight;
+    private bool gameStart = false;
 
     // Start is called before the first frame update
     void Start()
     {
         //moves player when game first starts
-        redSquareRigid.velocity = new Vector2(redVelocityX, redSquareRigid.velocity.y);
+        //redSquareRigid.velocity = new Vector2(redVelocityX, redSquareRigid.velocity.y);
     }
 
     // Update is called once per frame
+
+
     void Update()
     {
         //sets if player is going right or not
@@ -36,6 +40,10 @@ public class redSquare : MonoBehaviour
             }
         }
 
+        if (gameStart == false)
+        {
+            transform.position = new Vector2(0, 0);
+        }
 
 
         //this code was taken from internet, it checks every keycode to see which matches the key pressed
@@ -50,27 +58,8 @@ public class redSquare : MonoBehaviour
         //jump when key assigned in jumpKey is pressed
         if (pressedKey == jumpKey && GetComponent<powerups>().lostAllLives == false)
         {
-            //Debug.Log("matching");
-            tempVelocityX = redSquareRigid.velocity.x;
-            redSquareRigid.velocity = Vector2.up * redJump;
-            redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
-            pressedKey = 0;
+            jump();
 
-            //resets velocity when player gets off the ground
-            if (!GetComponent<powerups>().alive)
-            {
-                GetComponent<powerups>().alive = true;
-                //sets the new velocity correctly based on what direction the player should move in
-                if (goingRight)
-                {
-                    redSquareRigid.velocity = new Vector2(Math.Abs(redVelocityX), redSquareRigid.velocity.y);
-                }
-                else
-                {
-                    redSquareRigid.velocity = new Vector2(-Math.Abs(redVelocityX), redSquareRigid.velocity.y);
-
-                }
-            }
         }
 
         //Right Boundary of screen, changing direction of player
@@ -100,8 +89,8 @@ public class redSquare : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Rotating player if not colliding
-        if (!colliding)
+        //Rotating player if not colliding and game has started
+        if (!colliding && gameStart)
         {
             //Changing rotation based on which direction the square is moving
             if (redSquareRigid.velocity.x > 0)
@@ -118,6 +107,33 @@ public class redSquare : MonoBehaviour
                 //changing rotation
                 transform.rotation = Quaternion.Euler(0, 0, rotationSpeed);
             }
+        }
+    }
+
+
+    void jump()
+    {
+        gameStart = true;
+        tempVelocityX = redSquareRigid.velocity.x;
+        redSquareRigid.velocity = Vector2.up * redJump;
+        redSquareRigid.velocity = new Vector2(tempVelocityX, redSquareRigid.velocity.y);
+        pressedKey = 0;
+
+        //resets velocity when player gets off the ground
+        if (!GetComponent<powerups>().alive)
+        {
+            GetComponent<powerups>().alive = true;
+        }
+
+        //sets the new velocity correctly based on what direction the player should move in
+        if (goingRight)
+        {
+            redSquareRigid.velocity = new Vector2(Math.Abs(redVelocityX), redSquareRigid.velocity.y);
+        }
+        else
+        {
+            redSquareRigid.velocity = new Vector2(-Math.Abs(redVelocityX), redSquareRigid.velocity.y);
+
         }
     }
 }

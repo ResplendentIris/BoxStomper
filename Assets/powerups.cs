@@ -14,6 +14,7 @@ public class powerups : MonoBehaviour
     public int lives = 3;
     public bool shield = false;
     private GameObject downArrow;
+    private GameObject skull;
     public bool gravity = false;
     public bool alive = true;
     public bool lostAllLives;
@@ -27,6 +28,7 @@ public class powerups : MonoBehaviour
 
         //instantiation makes it so every player can have a new thing
         downArrow = Instantiate(GameObject.Find("down arrow"));
+        skull = Instantiate(GameObject.Find("skull"));
         shieldObject = Instantiate(GameObject.Find("benshield"));
         heartsObject = GameObject.Find("redHeart");
         hearts = Instantiate(heartsObject);
@@ -36,6 +38,23 @@ public class powerups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //moves skull to player when they are dead
+        if (!alive)
+        {
+            skull.GetComponent<SpriteRenderer>().enabled = true;
+            skull.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 newVelocity = rb.velocity;
+            newVelocity.x = 0f; 
+            rb.velocity = newVelocity;
+
+        }
+        else
+        {
+            skull.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
 
         //sets heart position to 1 above redsquare
         hearts.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
@@ -53,12 +72,6 @@ public class powerups : MonoBehaviour
             shieldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 
-        //sets veloctiy to 0 if player is dead
-        if (!alive)
-        {
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
-        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -90,6 +103,7 @@ public class powerups : MonoBehaviour
                 //puts player in dead state after damage is taken
                 alive = false;
             }
+            //if collides with a player it falls to the ground, only takes damage if you are lower than player hit
             else if (collision.gameObject.tag == "Players")
             {
                 if (collision.transform.position.y > gameObject.transform.position.y && alive)
@@ -97,8 +111,10 @@ public class powerups : MonoBehaviour
                     lives -= 1;
                     healthUpdate();
                     alive = false;
-                }
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
             }
+        }
 
     }
     //Function to update health
